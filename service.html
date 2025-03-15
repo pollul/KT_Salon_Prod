@@ -133,6 +133,7 @@
     .toggle-icon {
       transition: transform 0.3s ease;
       font-size: 16px;
+      display: inline-block;
     }
     
     .service-card-button.expanded .toggle-icon { transform: rotate(180deg); }
@@ -141,6 +142,7 @@
       font-size: 24px;
       width: 30px;
       text-align: center;
+      display: inline-block;
     }
     
     /* Category Styles */
@@ -170,15 +172,13 @@
     }
     
     .category-icon {
-      margin-right: 12px;
-      font-size: 18px;
-      color: #666;
-      transition: var(--transition);
+      display: none;
     }
     
     .category-icon-link {
       text-decoration: none;
       position: relative;
+      display: none;
     }
     
     .category-icon-link:hover .category-icon {
@@ -226,10 +226,7 @@
     }
     
     .service-item-icon {
-      margin-right: 8px;
-      font-size: 14px;
-      color: #888;
-      transition: transform 0.2s ease;
+      display: none;
     }
     
     .service-item:hover .service-item-icon {
@@ -238,7 +235,7 @@
     }
     
     .service-description {
-      margin: 5px 0 0 22px;
+      margin: 5px 0 0 0;
       font-size: 14px;
       color: var(--text-light);
       font-family: var(--font-secondary);
@@ -347,9 +344,7 @@
     }
     
     .service-error-icon {
-      font-size: 40px;
-      color: #e74c3c;
-      margin-bottom: 20px;
+      display: none;
     }
     
     .service-error-title, .service-error-message {
@@ -421,8 +416,6 @@
       .services-header h1 { font-size: 24px; }
       .services-header p { font-size: 14px; }
       .service-card-button { padding: 12px 15px; font-size: 15px; }
-      .service-icon { font-size: 18px; }
-      .category-name { font-size: 16px; }
       .service-name { font-size: 14px; }
       .service-description { font-size: 12px; }
       .service-price { font-size: 15px; }

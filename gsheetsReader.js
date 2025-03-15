@@ -7,7 +7,7 @@ const CONFIG = {
     loadDelay: 1000,
 };
 
-// Icon mappings
+// Service type icon mappings (only for main service categories)
 const SERVICE_ICONS = {
     'hair services': { icon: 'fas fa-cut', color: '#6a3093' },
     'nail services': { icon: 'fas fa-hand-sparkles', color: '#e94057' },
@@ -18,64 +18,8 @@ const SERVICE_ICONS = {
     'default': { icon: 'fas fa-concierge-bell', color: '#8e44ad' }
 };
 
-// Category icons by service type
-const CATEGORY_ICONS = {
-    'hair services': {
-        'cuts': 'fas fa-cut',
-        'color': 'fas fa-palette',
-        'style': 'fas fa-spray-can',
-        'styling': 'fas fa-spray-can',
-        'treatment': 'fas fa-pump-soap',
-        'braids': 'fas fa-vector-square',
-        'extensions': 'fas fa-expand',
-        'perms': 'fas fa-wave-square',
-        'default': 'fas fa-gem'
-    },
-    'nail services': {
-        'manicure': 'fas fa-hand-paper',
-        'pedicure': 'fas fa-shoe-prints',
-        'gel': 'fas fa-paint-brush',
-        'acrylic': 'fas fa-chess-board',
-        'polish': 'fas fa-fill-drip',
-        'nail art': 'fas fa-star',
-        'default': 'fas fa-magic'
-    },
-    'facial services': {
-        'facial': 'fas fa-smile',
-        'treatment': 'fas fa-seedling',
-        'mask': 'fas fa-mask',
-        'cleansing': 'fas fa-shower',
-        'exfoliation': 'fas fa-broom',
-        'extraction': 'fas fa-compress',
-        'default': 'fas fa-leaf'
-    },
-    'makeup services': {
-        'bridal': 'fas fa-glass-cheers',
-        'special occasion': 'fas fa-birthday-cake',
-        'everyday': 'fas fa-brush',
-        'eyes': 'fas fa-eye',
-        'lips': 'fas fa-kiss',
-        'default': 'fas fa-paint-brush'
-    },
-    'waxing services': {
-        'face': 'fas fa-smile',
-        'body': 'fas fa-user',
-        'arms': 'fas fa-hand-paper',
-        'legs': 'fas fa-socks',
-        'bikini': 'fas fa-venus',
-        'default': 'fas fa-tint'
-    },
-    'massage services': {
-        'swedish': 'fas fa-water',
-        'deep tissue': 'fas fa-fist-raised',
-        'hot stone': 'fas fa-mountain',
-        'aromatherapy': 'fas fa-air-freshener',
-        'scalp': 'fas fa-head-side',
-        'foot': 'fas fa-shoe-prints',
-        'default': 'fas fa-hands'
-    },
-    'default': { 'default': 'fas fa-star' }
-};
+// Empty category icons (removed as requested)
+const CATEGORY_ICONS = {};
 
 /**
  * Service Data Module - Handles all data operations
@@ -203,24 +147,7 @@ const UIModule = (() => {
         `service-header-bg ${type.toLowerCase().replace(/\s+/g, '-')}-bg`;
     
     const getCategoryIcon = (serviceType, category) => {
-        if (!category) return '';
-        
-        const type = serviceType.toLowerCase();
-        const cat = category.toLowerCase();
-        const iconMap = CATEGORY_ICONS[type] || CATEGORY_ICONS.default;
-        
-        // Find matching icon or use default
-        let iconClass = iconMap.default;
-        for (const key in iconMap) {
-            if (key !== 'default' && cat.includes(key)) {
-                iconClass = iconMap[key];
-                break;
-            }
-        }
-        
-        return `<a href="javascript:void(0);" class="category-icon-link" title="View ${category} services">
-                    <i class="${iconClass} category-icon"></i>
-                </a>`;
+        return '';
     };
     
     /**
@@ -259,7 +186,6 @@ const UIModule = (() => {
                 html += `
                     <div class="service-category" data-category="${category.toLowerCase()}">
                         <div class="category-header">
-                            ${getCategoryIcon(serviceType, category)}
                             <h3 class="category-name">${category}</h3>
                         </div>
                         <div class="service-list">`;
@@ -303,11 +229,10 @@ const UIModule = (() => {
         container.innerHTML = `
             <div class="service-error-container">
                 <div class="service-error">
-                    <div class="service-error-icon"><i class="fas fa-exclamation-circle"></i></div>
                     <h3 class="service-error-title">Unable to load services</h3>
                     <p class="service-error-message">${message}</p>
                     <button class="service-error-retry" id="retryButton">
-                        <i class="fas fa-sync-alt"></i> Try Again
+                        Try Again
                     </button>
                 </div>
             </div>`;
@@ -328,32 +253,6 @@ const UIModule = (() => {
      * Setup interactive elements
      */
     const setupInteractions = () => {
-        // Category filtering
-        document.querySelectorAll('.category-icon-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const categoryBlock = link.closest('.service-category');
-                const serviceCard = link.closest('.service-card-body');
-                const allCategories = serviceCard.querySelectorAll('.service-category');
-                
-                // Toggle filtering
-                if (link.classList.contains('active-filter')) {
-                    link.classList.remove('active-filter');
-                    allCategories.forEach(cat => cat.style.display = '');
-                } else {
-                    // Clear existing filters and set new one
-                    serviceCard.querySelectorAll('.category-icon-link')
-                        .forEach(otherLink => otherLink.classList.remove('active-filter'));
-                    link.classList.add('active-filter');
-                    
-                    // Show only the selected category
-                    allCategories.forEach(cat => {
-                        cat.style.display = (cat === categoryBlock) ? '' : 'none';
-                    });
-                }
-            });
-        });
-        
         // Accordion toggle
         document.querySelectorAll('.service-card-button').forEach(button => {
             button.addEventListener('click', () => {
