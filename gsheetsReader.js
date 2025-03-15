@@ -4,10 +4,10 @@ const CONFIG = {
     fetchTimeout: 10000,
     sheetName: 'Services',
     elementSelector: '.output',
-    loadDelay: 1000,
+    loadDelay: 500, // Reduced from 1000ms for faster loading
 };
 
-// Service type icon mappings (only for main service categories)
+// Service type icon mappings
 const SERVICE_ICONS = {
     'hair services': { icon: 'fas fa-cut', color: '#6a3093' },
     'nail services': { icon: 'fas fa-hand-sparkles', color: '#e94057' },
@@ -17,9 +17,6 @@ const SERVICE_ICONS = {
     'massage services': { icon: 'fas fa-hands', color: '#2c3e50' },
     'default': { icon: 'fas fa-concierge-bell', color: '#8e44ad' }
 };
-
-// Empty category icons (removed as requested)
-const CATEGORY_ICONS = {};
 
 /**
  * Service Data Module - Handles all data operations
@@ -34,8 +31,6 @@ const ServiceDataModule = (() => {
             const base = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?`;
             const query = encodeURIComponent('Select *');
             const url = `${base}&sheet=${CONFIG.sheetName}&tq=${query}`;
-            
-            console.log('Fetching data from:', url);
             
             const response = await fetch(url);
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
@@ -68,7 +63,6 @@ const ServiceDataModule = (() => {
                 return dataRow;
             });
             
-            console.log(`Processed ${data.length} rows of data`);
             return data;
         } catch (error) {
             console.error('Error fetching Google Sheets data:', error);
@@ -77,25 +71,20 @@ const ServiceDataModule = (() => {
     };
     
     /**
-     * Generate sample data for testing or as fallback
+     * Generate fallback data in case of service disruption
+     * Only used when Google Sheets API fails
      */
-    const createSampleData = () => [
+    const createFallbackData = () => [
         { type: 'Hair Services', category: 'Cuts', service: 'Shampoo, Cut & Blow Dry', price: '45', servicetime: '30' },
         { type: 'Hair Services', category: 'Cuts', service: 'Child\'s Cut', price: '20', servicetime: '30' },
-        { type: 'Hair Services', category: 'Cuts', service: 'Clipper Cut', price: '20', servicetime: '30' },
         { type: 'Hair Services', category: 'Cuts', service: 'Men\'s Cut', price: '25', servicetime: '30' },
         { type: 'Hair Services', category: 'Color', service: 'Root Touch-up', price: '70', servicetime: '60' },
         { type: 'Hair Services', category: 'Color', service: 'Full Color', price: '90', servicetime: '90' },
-        { type: 'Hair Services', category: 'Color', service: 'Balayage', price: '150', servicetime: '120' },
-        { type: 'Hair Services', category: 'Styling', service: 'Blow Dry & Style', price: '35', servicetime: '45' },
-        { type: 'Hair Services', category: 'Styling', service: 'Updo', price: '75', servicetime: '60' },
         { type: 'Nail Services', category: 'Manicure', service: 'Regular Manicure', price: '25', servicetime: '30' },
         { type: 'Nail Services', category: 'Manicure', service: 'Gel Manicure', price: '40', servicetime: '45' },
         { type: 'Nail Services', category: 'Pedicure', service: 'Regular Pedicure', price: '35', servicetime: '45' },
-        { type: 'Nail Services', category: 'Pedicure', service: 'Deluxe Pedicure', price: '50', servicetime: '60' },
         { type: 'Facial Services', category: 'Facial', service: 'Express Facial', price: '45', servicetime: '30' },
         { type: 'Facial Services', category: 'Facial', service: 'Deep Cleansing Facial', price: '75', servicetime: '60' },
-        { type: 'Facial Services', category: 'Treatment', service: 'Chemical Peel', price: '90', servicetime: '45' },
     ];
     
     /**
@@ -129,26 +118,23 @@ const ServiceDataModule = (() => {
         return services;
     };
     
-    return { fetchFromGoogleSheets, createSampleData, organizeServiceData };
+    return { fetchFromGoogleSheets, createFallbackData, organizeServiceData };
 })();
 
 /**
  * UI Module - Handles all rendering and UI interaction
  */
 const UIModule = (() => {
-    // Helper functions for icons and styling
+    // Get service type icon based on service type
     const getServiceTypeIcon = (type) => {
         const lowerType = type.toLowerCase();
         const iconData = SERVICE_ICONS[lowerType] || SERVICE_ICONS.default;
         return `<i class="${iconData.icon} service-icon" style="color: ${iconData.color}"></i>`;
     };
     
+    // Get service background class based on service type
     const getServiceBgClass = (type) => 
         `service-header-bg ${type.toLowerCase().replace(/\s+/g, '-')}-bg`;
-    
-    const getCategoryIcon = (serviceType, category) => {
-        return '';
-    };
     
     /**
      * Generate HTML for service cards
@@ -221,7 +207,7 @@ const UIModule = (() => {
     };
     
     /**
-     * UI helper functions
+     * UI helper functions for error handling and loading states
      */
     const showError = (message, container) => {
         if (!container) return;
@@ -313,18 +299,15 @@ async function initializeServices() {
         const data = await ServiceDataModule.fetchFromGoogleSheets();
         const organizedData = ServiceDataModule.organizeServiceData(data);
         UIModule.renderServices(organizedData, outputContainer);
-        console.log('Services successfully loaded from Google Sheets');
     } catch (error) {
-        console.error('Failed to load from Google Sheets, using sample data:', error);
-        const sampleData = ServiceDataModule.createSampleData();
-        UIModule.renderServices(ServiceDataModule.organizeServiceData(sampleData), outputContainer);
+        console.error('Failed to load from Google Sheets, using fallback data:', error);
+        const fallbackData = ServiceDataModule.createFallbackData();
+        UIModule.renderServices(ServiceDataModule.organizeServiceData(fallbackData), outputContainer);
     }
 }
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM fully loaded, initializing services...');
-    
     // Add a small delay to ensure all dependencies are loaded
     setTimeout(initializeServices, CONFIG.loadDelay);
     
@@ -333,8 +316,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const outputContainer = document.querySelector(CONFIG.elementSelector);
         if (outputContainer?.querySelector('.service-loader')) {
             console.warn('Google Sheets data load timed out, falling back to sample data');
-            const sampleData = ServiceDataModule.createSampleData();
-            UIModule.renderServices(ServiceDataModule.organizeServiceData(sampleData), outputContainer);
+            const fallbackData = ServiceDataModule.createFallbackData();
+            UIModule.renderServices(ServiceDataModule.organizeServiceData(fallbackData), outputContainer);
         }
     }, CONFIG.fetchTimeout);
 });
