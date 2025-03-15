@@ -11,10 +11,10 @@
   <meta name="twitter:title" content="Services">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
-  <meta name="description" content="">
+  <meta name="description" content="KT's Coiffure - Beauty salon services including hair, nail, facial, and massage services.">
   
   
-  <title>Services</title>
+  <title>KT's Coiffure - Our Services</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
@@ -31,8 +31,9 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css" rel="stylesheet" />
   
   <style>
+    /* Services Page Main Styles */
     .services-header {
-      background-color: #f8f9fa;
+      background-color: #fcf4f7;
       padding: 60px 0;
       margin-bottom: 40px;
       text-align: center;
@@ -40,7 +41,7 @@
     
     .services-header h1 {
       color: #333;
-      font-family: 'Epilogue', sans-serif;
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 600;
       margin-bottom: 20px;
     }
@@ -50,6 +51,7 @@
       font-size: 1.2rem;
       max-width: 800px;
       margin: 0 auto;
+      font-family: 'Epilogue', sans-serif;
     }
     
     .services-container {
@@ -58,94 +60,249 @@
       padding: 0 20px 60px;
     }
     
-    .accordion-button {
-      background-color: #f8f9fa !important;
-      color: #333 !important;
-      font-family: 'Epilogue', sans-serif;
-      font-weight: 600;
-      padding: 20px 30px;
-      border-radius: 8px !important;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    
-    .accordion-button:not(.collapsed) {
-      color: #000 !important;
-      background-color: #e7f1ff !important;
-    }
-    
-    .accordion-body {
-      padding: 20px 30px;
-      background-color: #fff;
-      border-radius: 0 0 8px 8px;
-    }
-    
-    .table {
-      margin-bottom: 0;
-    }
-    
-    .table td {
-      padding: 15px 10px;
-      vertical-align: middle;
-      border-color: #eee;
-    }
-    
-    .table h2 {
-      font-family: 'Epilogue', sans-serif;
-      font-size: 1.5rem;
-      color: #333;
-      margin: 20px 0 10px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #eee;
-    }
-    
-    .service-name {
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-    
-    .service-price {
-      font-weight: 600;
-      color: #000;
-    }
-    
-    .service-time {
-      color: #666;
-    }
-    
-    .spinner-container {
+    /* New Service Card Styles */
+    .service-cards-container {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 200px;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 30px;
     }
     
-    /* New styles for service icons */
+    .services-summary {
+      text-align: center;
+      margin-bottom: 20px;
+      font-family: 'Epilogue', sans-serif;
+      color: #555;
+    }
+    
+    .services-summary p {
+      font-size: 16px;
+    }
+    
+    .services-summary strong {
+      color: #333;
+    }
+    
+    .service-card {
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      background: white;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+    
+    .service-card-header {
+      position: relative;
+    }
+    
+    .service-card-button {
+      width: 100%;
+      background: white;
+      border: none;
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
+      text-align: left;
+      cursor: pointer;
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: #333;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+    
+    .service-card-button:hover {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .service-card-button:focus {
+      outline: none;
+    }
+    
+    .service-type-name {
+      margin-left: 15px;
+      flex-grow: 1;
+    }
+    
+    .toggle-icon {
+      transition: transform 0.3s ease;
+      font-size: 16px;
+    }
+    
+    .service-card-button.expanded .toggle-icon {
+      transform: rotate(180deg);
+    }
+    
     .service-icon {
-      margin-right: 15px;
-      font-size: 1.5rem;
-      color: #666;
+      font-size: 24px;
       width: 30px;
       text-align: center;
     }
     
+    .service-card-collapse {
+      transition: all 0.3s ease;
+    }
+    
+    .service-card-body {
+      padding: 0;
+    }
+    
+    /* Category Styles */
+    .service-category {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .service-category:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    
+    .category-header {
+      display: flex;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #fcfcfc;
+    }
+    
+    .category-name {
+      margin: 0;
+      font-family: 'Epilogue', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #444;
+    }
+    
     .category-icon {
-      margin-right: 10px;
+      margin-right: 12px;
+      font-size: 18px;
       color: #666;
+      transition: all 0.3s ease;
     }
     
-    .service-table-icon {
-      margin-right: 10px;
+    .category-icon-link {
+      text-decoration: none;
+      position: relative;
+    }
+    
+    .category-icon-link:hover .category-icon {
+      color: #6a3093;
+      transform: scale(1.2);
+    }
+    
+    .category-icon-link.active-filter .category-icon {
+      color: #6a3093;
+    }
+    
+    /* Service Item Styles */
+    .service-list {
+      padding: 10px 0;
+    }
+    
+    .service-item {
+      padding: 15px 30px;
+      transition: all 0.3s ease;
+      border-left: 3px solid transparent;
+    }
+    
+    .service-item:hover {
+      background-color: rgba(252, 244, 247, 0.5);
+      border-left-color: #6a3093;
+    }
+    
+    .service-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    
+    .service-info {
+      flex-grow: 1;
+      padding-right: 20px;
+    }
+    
+    .service-name {
+      font-family: 'Epilogue', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0 0 5px 0;
+      color: #333;
+      display: flex;
+      align-items: center;
+    }
+    
+    .service-item-icon {
+      margin-right: 8px;
+      font-size: 14px;
       color: #888;
-      font-size: 0.9rem;
+      transition: transform 0.2s ease;
     }
     
-    /* Service type background images */
+    .service-item:hover .service-item-icon {
+      transform: translateX(3px);
+      color: #6a3093;
+    }
+    
+    .service-description {
+      margin: 5px 0 0 22px;
+      font-size: 14px;
+      color: #777;
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 300;
+    }
+    
+    .service-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      min-width: 100px;
+    }
+    
+    .service-price {
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    
+    .service-time {
+      font-family: 'Epilogue', sans-serif;
+      font-size: 14px;
+      color: #888;
+    }
+    
+    /* Popular Badge */
+    .popular-badge {
+      display: inline-block;
+      font-size: 11px;
+      background-color: #6a3093;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 30px;
+      margin-left: 10px;
+      vertical-align: middle;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    
+    .popular-service {
+      background-color: rgba(106, 48, 147, 0.05);
+    }
+    
+    /* Service type background styling */
     .service-header-bg {
       position: relative;
       overflow: hidden;
-      border-radius: 8px;
-      transition: all 0.3s ease;
     }
     
     .service-header-bg:before {
@@ -153,7 +310,7 @@
       position: absolute;
       top: 0;
       right: 0;
-      width: 40%;
+      width: 30%;
       height: 100%;
       background-size: cover;
       background-position: center;
@@ -163,161 +320,182 @@
     }
     
     .service-header-bg:hover:before {
-      opacity: 0.2;
+      opacity: 0.15;
     }
     
-    .service-header-bg .accordion-button {
-      position: relative;
-      z-index: 1;
-      background: transparent !important;
+    /* Loading Animation */
+    .service-loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 0;
     }
     
-    .hair-services-bg:before {
-      background-image: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');
+    .service-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(106, 48, 147, 0.1);
+      border-radius: 50%;
+      border-top-color: #6a3093;
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 20px;
     }
     
-    .nail-services-bg:before {
-      background-image: url('https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
     
-    .facial-services-bg:before {
-      background-image: url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');
+    .service-loader p {
+      font-family: 'Epilogue', sans-serif;
+      color: #666;
     }
     
-    .makeup-services-bg:before {
-      background-image: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');
+    /* Error Display */
+    .service-error-container {
+      display: flex;
+      justify-content: center;
+      padding: 50px 0;
     }
     
-    .waxing-services-bg:before {
-      background-image: url('https://images.unsplash.com/photo-1596755389378-c31d21fd1273?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');
+    .service-error {
+      max-width: 500px;
+      text-align: center;
+      padding: 30px;
+      border-radius: 12px;
+      background-color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
     
-    .massage-services-bg:before {
-      background-image: url('https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');
+    .service-error-icon {
+      font-size: 40px;
+      color: #e74c3c;
+      margin-bottom: 20px;
     }
     
-    /* Service row styling */
-    .table tr {
-      transition: all 0.2s ease;
+    .service-error-title {
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #333;
     }
     
-    .table tr:hover {
-      background-color: #f8f9fa;
-      transform: translateX(5px);
+    .service-error-message {
+      font-family: 'Epilogue', sans-serif;
+      color: #666;
+      margin-bottom: 20px;
     }
     
-    .table tr td:first-child {
-      border-left: 3px solid transparent;
-      transition: border-left-color 0.2s ease;
+    .service-error-retry {
+      border: none;
+      background-color: #6a3093;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
     
-    .table tr:hover td:first-child {
-      border-left-color: #6c757d;
+    .service-error-retry:hover {
+      background-color: #5a2082;
+      transform: translateY(-2px);
     }
     
-    /* Service icons with animation */
-    .service-table-icon {
-      transition: transform 0.2s ease;
-    }
-    
-    tr:hover .service-table-icon {
-      transform: translateX(3px);
-    }
-    
-    /* Category heading with underline animation */
-    .table h2 {
-      position: relative;
-      display: inline-block;
-      padding-bottom: 10px;
-    }
-    
-    .table h2:after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 0;
-      background-color: #007bff;
-      transition: width 0.3s ease;
-    }
-    
-    .table h2:hover:after {
-      width: 100%;
-    }
-    
-    /* Category icon filtering */
-    .category-icon-link {
-      text-decoration: none;
-      position: relative;
-      display: inline-block;
-    }
-    
-    .category-icon-link:hover .category-icon {
-      color: #007bff;
-      transform: scale(1.2);
-    }
-    
-    .category-icon {
-      transition: all 0.2s ease;
-    }
-    
-    .active-filter .category-icon {
-      color: #007bff;
-    }
-    
-    /* Responsive styles */
+    /* Responsive Adjustments */
     @media (max-width: 768px) {
-      .service-header-bg:before {
-        width: 25%;
-        opacity: 0.05;
+      .services-header {
+        padding: 40px 0;
       }
       
-      .table tr:hover {
-        transform: none;
+      .services-header h1 {
+        font-size: 28px;
+      }
+      
+      .services-header p {
+        font-size: 16px;
+      }
+      
+      .service-card-button {
+        padding: 15px 20px;
+        font-size: 16px;
+      }
+      
+      .category-header {
+        padding: 12px 20px;
+      }
+      
+      .category-name {
+        font-size: 18px;
+      }
+      
+      .service-item {
+        padding: 12px 20px;
+      }
+      
+      .service-details {
+        flex-direction: column;
+      }
+      
+      .service-info {
+        padding-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+      }
+      
+      .service-meta {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .service-price {
+        margin-bottom: 0;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .services-header h1 {
+        font-size: 24px;
+      }
+      
+      .services-header p {
+        font-size: 14px;
+      }
+      
+      .service-card-button {
+        padding: 12px 15px;
+        font-size: 15px;
       }
       
       .service-icon {
-        font-size: 1.2rem;
-        margin-right: 10px;
+        font-size: 18px;
       }
       
-      .category-icon {
-        font-size: 0.9rem;
+      .category-name {
+        font-size: 16px;
       }
       
       .service-name {
-        font-size: 1rem;
+        font-size: 14px;
+      }
+      
+      .service-description {
+        font-size: 12px;
+      }
+      
+      .service-price {
+        font-size: 15px;
       }
       
       .service-time {
-        font-size: 0.8rem;
-      }
-      
-      .table td {
-        padding: 10px 5px;
-      }
-      
-      .accordion-button {
-        padding: 15px 20px;
-      }
-    }
-    
-    /* For very small screens */
-    @media (max-width: 576px) {
-      .service-price, .service-time {
-        font-size: 0.9rem;
-      }
-      
-      .service-name {
-        max-width: 160px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        font-size: 12px;
       }
       
       .service-header-bg:before {
-        display: none;
+        width: 15%;
       }
     }
   </style>
@@ -360,13 +538,10 @@
   </div>
 
   <div class="services-container">
-    <div class="accordion" id="accordionExampleY">
-      <div class="output">
-        <div class="spinner-container">
-          <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
+    <div class="output">
+      <div class="service-loader">
+        <div class="service-spinner"></div>
+        <p>Loading our services...</p>
       </div>
     </div>
   </div>
@@ -376,111 +551,6 @@
   <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
   <script type="text/javascript" src="gsheetsReader.js"></script>
-  
-  <script>
-    // Custom script to enhance the appearance of dynamically loaded content
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('Service page fully loaded');
-      
-      // Check every second if content has loaded
-      const checkInterval = setInterval(function() {
-        const tables = document.querySelectorAll('.table');
-        console.log('Checking for tables:', tables.length);
-        if (tables.length > 0) {
-          // Once content is loaded, enhance the appearance
-          tables.forEach(function(table) {
-            // Add styling to price columns
-            const priceCells = table.querySelectorAll('td:nth-child(2)');
-            priceCells.forEach(function(cell) {
-              cell.classList.add('service-price');
-            });
-            
-            // Add styling to service name columns
-            const serviceNameCells = table.querySelectorAll('td:nth-child(1)');
-            serviceNameCells.forEach(function(cell) {
-              cell.classList.add('service-name');
-            });
-            
-            // Add styling to time columns
-            const timeCells = table.querySelectorAll('td:nth-child(3)');
-            timeCells.forEach(function(cell) {
-              cell.classList.add('service-time');
-            });
-          });
-          
-          // Set up event listeners for category icons
-          setupCategoryFilters();
-          
-          console.log('Added styling to service tables');
-          clearInterval(checkInterval);
-        }
-      }, 1000);
-    });
-    
-    // Function to handle category icon clicks for filtering
-    function setupCategoryFilters() {
-      // Wait for the category icons to be added to the DOM
-      setTimeout(() => {
-        const categoryIcons = document.querySelectorAll('.category-icon-link');
-        
-        categoryIcons.forEach(icon => {
-          icon.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const categoryTitle = this.getAttribute('title').replace('View ', '').replace(' services', '');
-            const accordionBody = this.closest('.accordion-body');
-            const allRows = accordionBody.querySelectorAll('tr');
-            const categoryRow = this.closest('tr');
-            
-            // Toggle active state
-            const isActive = this.classList.contains('active-filter');
-            
-            // Reset all icons to default state
-            accordionBody.querySelectorAll('.category-icon-link').forEach(link => {
-              link.classList.remove('active-filter');
-              link.querySelector('i').style.color = '';
-            });
-            
-            if (!isActive) {
-              // Add active state to clicked icon
-              this.classList.add('active-filter');
-              this.querySelector('i').style.color = '#007bff';
-              
-              // Show only service rows matching this category
-              let showRows = false;
-              allRows.forEach(row => {
-                // If it's a category row
-                if (row.querySelector('h2')) {
-                  // Start showing rows after the clicked category
-                  showRows = (row === categoryRow);
-                  row.style.display = ''; // Always show category rows
-                } 
-                // If it's a service row
-                else {
-                  // If we're showing rows from the current category or if it's a different category
-                  if (showRows && !row.querySelector('h2')) {
-                    row.style.display = '';
-                  } else {
-                    row.style.display = 'none';
-                  }
-                  
-                  // Stop showing rows when we hit the next category
-                  if (row.querySelector('h2') && row !== categoryRow) {
-                    showRows = false;
-                  }
-                }
-              });
-            } else {
-              // Show all rows if clicking the active filter again
-              allRows.forEach(row => {
-                row.style.display = '';
-              });
-            }
-          });
-        });
-      }, 1000);
-    }
-  </script>
 
   <script src="assets/smoothscroll/smooth-scroll.js"></script>
   <script src="assets/ytplayer/index.js"></script>
