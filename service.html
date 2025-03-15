@@ -161,6 +161,23 @@
       align-items: center;
       padding: 15px 30px;
       background-color: #fcfcfc;
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .category-header:hover {
+      background-color: #f7f7f7;
+    }
+
+    .category-header .category-toggle-icon {
+      transition: transform 0.3s ease;
+      font-size: 14px;
+      margin-left: auto;
+      color: #777;
+    }
+    
+    .category-header.expanded .category-toggle-icon {
+      transform: rotate(180deg);
     }
     
     .category-name {
@@ -191,7 +208,17 @@
     }
     
     /* Service Item Styles */
-    .service-list { padding: 10px 0; }
+    .service-list { 
+      padding: 10px 0;
+      max-height: 1000px;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    
+    .service-list.collapsed {
+      max-height: 0;
+      padding: 0;
+    }
     
     .service-item {
       padding: 15px 30px;
@@ -475,6 +502,66 @@
   <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
   <script type="text/javascript" src="gsheetsReader.js"></script>
+
+  <script>
+    // Add category collapse functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // First set up the existing service type accordions from gsheetsReader.js
+      
+      // Then add the category collapse functionality
+      function setupCategoryToggle() {
+        // Find all category headers
+        const categoryHeaders = document.querySelectorAll('.category-header');
+        
+        // Initialize each header with a toggle icon
+        categoryHeaders.forEach(header => {
+          // Add toggle icon if it doesn't exist
+          if (!header.querySelector('.category-toggle-icon')) {
+            const toggleIcon = document.createElement('i');
+            toggleIcon.className = 'fas fa-angle-down category-toggle-icon';
+            header.appendChild(toggleIcon);
+          }
+          
+          // Set initial state (expanded)
+          header.classList.add('expanded');
+          
+          // Add click event
+          header.addEventListener('click', function() {
+            const isExpanded = this.classList.contains('expanded');
+            const serviceList = this.nextElementSibling;
+            
+            if (isExpanded) {
+              // Collapse
+              this.classList.remove('expanded');
+              serviceList.classList.add('collapsed');
+            } else {
+              // Expand
+              this.classList.add('expanded');
+              serviceList.classList.remove('collapsed');
+            }
+          });
+        });
+      }
+      
+      // Run initially after a short delay to ensure the service data is loaded
+      setTimeout(setupCategoryToggle, 1500);
+      
+      // Also run when services are dynamically loaded
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.addedNodes.length) {
+            setupCategoryToggle();
+          }
+        });
+      });
+      
+      // Start observing the output container for service data
+      const outputContainer = document.querySelector('.output');
+      if (outputContainer) {
+        observer.observe(outputContainer, { childList: true, subtree: true });
+      }
+    });
+  </script>
 
   <script src="assets/smoothscroll/smooth-scroll.js"></script>
   <script src="assets/ytplayer/index.js"></script>
