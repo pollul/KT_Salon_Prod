@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  >
+<html>
 <head>
   
   <meta charset="UTF-8">
@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
-    <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap"></noscript>
@@ -27,26 +27,307 @@
   <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
   
   
-  <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        rel="stylesheet"
-        />
-        <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css"
-        rel="stylesheet"
-        />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css" rel="stylesheet" />
   
-
+  <style>
+    .services-header {
+      background-color: #f8f9fa;
+      padding: 60px 0;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    
+    .services-header h1 {
+      color: #333;
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    
+    .services-header p {
+      color: #666;
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .services-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+    
+    .accordion-button {
+      background-color: #f8f9fa !important;
+      color: #333 !important;
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 600;
+      padding: 20px 30px;
+      border-radius: 8px !important;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .accordion-button:not(.collapsed) {
+      color: #000 !important;
+      background-color: #e7f1ff !important;
+    }
+    
+    .accordion-body {
+      padding: 20px 30px;
+      background-color: #fff;
+      border-radius: 0 0 8px 8px;
+    }
+    
+    .table {
+      margin-bottom: 0;
+    }
+    
+    .table td {
+      padding: 15px 10px;
+      vertical-align: middle;
+      border-color: #eee;
+    }
+    
+    .table h2 {
+      font-family: 'Epilogue', sans-serif;
+      font-size: 1.5rem;
+      color: #333;
+      margin: 20px 0 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #eee;
+    }
+    
+    .service-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    
+    .service-price {
+      font-weight: 600;
+      color: #000;
+    }
+    
+    .service-time {
+      color: #666;
+    }
+    
+    .spinner-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+    }
+    
+    /* New styles for service icons */
+    .service-icon {
+      margin-right: 15px;
+      font-size: 1.5rem;
+      color: #666;
+      width: 30px;
+      text-align: center;
+    }
+    
+    .category-icon {
+      margin-right: 10px;
+      color: #666;
+    }
+    
+    .service-table-icon {
+      margin-right: 10px;
+      color: #888;
+      font-size: 0.9rem;
+    }
+    
+    /* Service type background images */
+    .service-header-bg {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .service-header-bg:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.1;
+      transition: opacity 0.3s ease;
+      z-index: 0;
+    }
+    
+    .service-header-bg:hover:before {
+      opacity: 0.2;
+    }
+    
+    .service-header-bg .accordion-button {
+      position: relative;
+      z-index: 1;
+      background: transparent !important;
+    }
+    
+    .hair-services-bg:before {
+      background-image: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');
+    }
+    
+    .nail-services-bg:before {
+      background-image: url('https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');
+    }
+    
+    .facial-services-bg:before {
+      background-image: url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');
+    }
+    
+    .makeup-services-bg:before {
+      background-image: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');
+    }
+    
+    .waxing-services-bg:before {
+      background-image: url('https://images.unsplash.com/photo-1596755389378-c31d21fd1273?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');
+    }
+    
+    .massage-services-bg:before {
+      background-image: url('https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');
+    }
+    
+    /* Service row styling */
+    .table tr {
+      transition: all 0.2s ease;
+    }
+    
+    .table tr:hover {
+      background-color: #f8f9fa;
+      transform: translateX(5px);
+    }
+    
+    .table tr td:first-child {
+      border-left: 3px solid transparent;
+      transition: border-left-color 0.2s ease;
+    }
+    
+    .table tr:hover td:first-child {
+      border-left-color: #6c757d;
+    }
+    
+    /* Service icons with animation */
+    .service-table-icon {
+      transition: transform 0.2s ease;
+    }
+    
+    tr:hover .service-table-icon {
+      transform: translateX(3px);
+    }
+    
+    /* Category heading with underline animation */
+    .table h2 {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+    
+    .table h2:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #007bff;
+      transition: width 0.3s ease;
+    }
+    
+    .table h2:hover:after {
+      width: 100%;
+    }
+    
+    /* Category icon filtering */
+    .category-icon-link {
+      text-decoration: none;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .category-icon-link:hover .category-icon {
+      color: #007bff;
+      transform: scale(1.2);
+    }
+    
+    .category-icon {
+      transition: all 0.2s ease;
+    }
+    
+    .active-filter .category-icon {
+      color: #007bff;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .service-header-bg:before {
+        width: 25%;
+        opacity: 0.05;
+      }
+      
+      .table tr:hover {
+        transform: none;
+      }
+      
+      .service-icon {
+        font-size: 1.2rem;
+        margin-right: 10px;
+      }
+      
+      .category-icon {
+        font-size: 0.9rem;
+      }
+      
+      .service-name {
+        font-size: 1rem;
+      }
+      
+      .service-time {
+        font-size: 0.8rem;
+      }
+      
+      .table td {
+        padding: 10px 5px;
+      }
+      
+      .accordion-button {
+        padding: 15px 20px;
+      }
+    }
+    
+    /* For very small screens */
+    @media (max-width: 576px) {
+      .service-price, .service-time {
+        font-size: 0.9rem;
+      }
+      
+      .service-name {
+        max-width: 160px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      
+      .service-header-bg:before {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
   
   <section data-bs-version="5.1" class="menu3 cid-tp6SoI7EnD" once="menu" id="menu3-8">
-    
-
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         <div class="container-fluid">
             <div class="navbar-brand">
-                
                 <span class="navbar-caption-wrap"><a class="navbar-caption text-black text-primary display-2" href="index.html">KT'S COIFFURE</a></span>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,41 +350,143 @@
             </div>
         </div>
     </nav>
-</section>
+  </section>
 
-<div id="custom-html-a"><!-- Type valid HTML here -->
+  <div class="services-header">
+    <div class="container">
+      <h1>Our Services</h1>
+      <p>Experience luxury hair care at KT's Coiffure. Our team of professional stylists is dedicated to providing high-quality services tailored to your unique needs.</p>
+    </div>
+  </div>
 
-
-<div>
-    <h1 class="display-1">Our Services</h1>
-</div>
-
-
-<div class="accordion" id="accordionExampleY">
-    <div class="output">
-        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+  <div class="services-container">
+    <div class="accordion" id="accordionExampleY">
+      <div class="output">
+        <div class="spinner-container">
+          <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
             <span class="visually-hidden">Loading...</span>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<br>
-<script type="text/javascript" src="gsheetsReader.js">
-</script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js">
-</script>
-    </div>
+  </div>
 
-
-<script src="assets/witsec-jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <!-- Load scripts in the correct order -->
+  <script src="assets/witsec-jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
+  <script type="text/javascript" src="gsheetsReader.js"></script>
+  
+  <script>
+    // Custom script to enhance the appearance of dynamically loaded content
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Service page fully loaded');
+      
+      // Check every second if content has loaded
+      const checkInterval = setInterval(function() {
+        const tables = document.querySelectorAll('.table');
+        console.log('Checking for tables:', tables.length);
+        if (tables.length > 0) {
+          // Once content is loaded, enhance the appearance
+          tables.forEach(function(table) {
+            // Add styling to price columns
+            const priceCells = table.querySelectorAll('td:nth-child(2)');
+            priceCells.forEach(function(cell) {
+              cell.classList.add('service-price');
+            });
+            
+            // Add styling to service name columns
+            const serviceNameCells = table.querySelectorAll('td:nth-child(1)');
+            serviceNameCells.forEach(function(cell) {
+              cell.classList.add('service-name');
+            });
+            
+            // Add styling to time columns
+            const timeCells = table.querySelectorAll('td:nth-child(3)');
+            timeCells.forEach(function(cell) {
+              cell.classList.add('service-time');
+            });
+          });
+          
+          // Set up event listeners for category icons
+          setupCategoryFilters();
+          
+          console.log('Added styling to service tables');
+          clearInterval(checkInterval);
+        }
+      }, 1000);
+    });
+    
+    // Function to handle category icon clicks for filtering
+    function setupCategoryFilters() {
+      // Wait for the category icons to be added to the DOM
+      setTimeout(() => {
+        const categoryIcons = document.querySelectorAll('.category-icon-link');
+        
+        categoryIcons.forEach(icon => {
+          icon.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const categoryTitle = this.getAttribute('title').replace('View ', '').replace(' services', '');
+            const accordionBody = this.closest('.accordion-body');
+            const allRows = accordionBody.querySelectorAll('tr');
+            const categoryRow = this.closest('tr');
+            
+            // Toggle active state
+            const isActive = this.classList.contains('active-filter');
+            
+            // Reset all icons to default state
+            accordionBody.querySelectorAll('.category-icon-link').forEach(link => {
+              link.classList.remove('active-filter');
+              link.querySelector('i').style.color = '';
+            });
+            
+            if (!isActive) {
+              // Add active state to clicked icon
+              this.classList.add('active-filter');
+              this.querySelector('i').style.color = '#007bff';
+              
+              // Show only service rows matching this category
+              let showRows = false;
+              allRows.forEach(row => {
+                // If it's a category row
+                if (row.querySelector('h2')) {
+                  // Start showing rows after the clicked category
+                  showRows = (row === categoryRow);
+                  row.style.display = ''; // Always show category rows
+                } 
+                // If it's a service row
+                else {
+                  // If we're showing rows from the current category or if it's a different category
+                  if (showRows && !row.querySelector('h2')) {
+                    row.style.display = '';
+                  } else {
+                    row.style.display = 'none';
+                  }
+                  
+                  // Stop showing rows when we hit the next category
+                  if (row.querySelector('h2') && row !== categoryRow) {
+                    showRows = false;
+                  }
+                }
+              });
+            } else {
+              // Show all rows if clicking the active filter again
+              allRows.forEach(row => {
+                row.style.display = '';
+              });
+            }
+          });
+        });
+      }, 1000);
+    }
+  </script>
+
   <script src="assets/smoothscroll/smooth-scroll.js"></script>
   <script src="assets/ytplayer/index.js"></script>
-      <script src="assets/dropdown/js/navbar-dropdown.js"></script>
+  <script src="assets/dropdown/js/navbar-dropdown.js"></script>
   <script src="assets/theme/js/script.js"></script>
   
-  
-  
-
-<script>"use strict";if("loading"in HTMLImageElement.prototype){document.querySelectorAll('img[loading="lazy"],iframe[loading="lazy"]').forEach(e=>{e.src=e.dataset.src,e.style.paddingTop=100*e.getAttribute("data-aspectratio")+"%",e.style.height=0,e.onload=function(){e.removeAttribute("style")}})}else{const e=document.createElement("script");e.src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js",document.body.appendChild(e)}</script>
+  <script>"use strict";if("loading"in HTMLImageElement.prototype){document.querySelectorAll('img[loading="lazy"],iframe[loading="lazy"]').forEach(e=>{e.src=e.dataset.src,e.style.paddingTop=100*e.getAttribute("data-aspectratio")+"%",e.style.height=0,e.onload=function(){e.removeAttribute("style")}})}else{const e=document.createElement("script");e.src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js",document.body.appendChild(e)}</script>
 </body>
 </html>

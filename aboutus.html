@@ -37,6 +37,102 @@
         rel="stylesheet"
         />
   
+  <style>
+    /* Custom styles for hours section */
+    .hours-section {
+      padding: 80px 0;
+      background-color: #f8f9fa;
+    }
+    
+    .hours-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .hours-heading {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .hours-heading h2 {
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    
+    .hours-heading p {
+      color: #666;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .hours-card {
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    
+    .hours-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+    
+    .hours-table tr {
+      transition: all 0.2s ease;
+    }
+    
+    .hours-table tr:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .hours-table th {
+      padding: 20px;
+      text-align: left;
+      background-color: #f8f9fa;
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 600;
+      color: #333;
+      font-size: 1.1rem;
+    }
+    
+    .hours-table td {
+      padding: 20px;
+      border-top: 1px solid #eee;
+      font-family: 'Epilogue', sans-serif;
+    }
+    
+    .hours-table .day {
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .hours-table .time {
+      color: #555;
+    }
+    
+    .today-highlight {
+      background-color: #e7f1ff !important;
+    }
+    
+    .weekend-highlight td {
+      color: #f14e71;
+    }
+    
+    @media (max-width: 768px) {
+      .hours-section {
+        padding: 60px 0;
+      }
+      
+      .hours-table th, .hours-table td {
+        padding: 15px;
+      }
+    }
+  </style>
 
 </head>
 <body>
@@ -95,89 +191,55 @@
     </div>
 </section>
 
-<section data-bs-version="5.1" class="table2 marketm4_table2 section-table cid-ttnrTdlJEx" id="table2-p">
-
-	
-	
-	<div class="container container-table">
-		<div class="row justify-content-center">
-			<div class="col-xl-10">
-				<h2 class="mbr-section-title mbr-fonts-style mbr-bold align-center display-2">
-					Hours</h2>
-			</div>
-		</div>
-		<div class="table-wrapper">
-			<div class="container">
-				
-			</div>
-
-			<div class="container scroll">
-				<table class="table" cellspacing="0" data-empty="No matching records found">
-					<thead>
-						<tr class="table-heads">
-							
-							
-							
-							
-						<th class="head-item mbr-medium mbr-fonts-style display-5"><strong>Days</strong></th><th class="head-item mbr-medium mbr-fonts-style display-5">
-								Time</th></tr>
-					</thead>
-
-					<tbody>
-						
-						
-						
-						
-					<tr>
-							
-							
-							
-							
-						<td class="body-item mbr-fonts-style display-7"><strong>
-								MONDAY</strong></td><td class="body-item mbr-fonts-style display-7">9:00 AM - 7:00 PM</td></tr><tr>
-							
-							
-							
-							
-						<td class="body-item mbr-fonts-style display-7"><strong>
-								TUESDAY</strong></td><td class="body-item mbr-fonts-style display-7">9:00 AM - 7:00 PM</td></tr><tr>
-							
-							
-							
-							
-						<td class="body-item mbr-fonts-style display-7"><strong>
-								WEDNESDAY</strong></td><td class="body-item mbr-fonts-style display-7">9:00 AM - 7:00 PM</td></tr><tr>
-							
-							
-							
-							
-						<td class="body-item mbr-fonts-style display-7"><strong>
-								THURSDAY</strong></td><td class="body-item mbr-fonts-style display-7">9:00 AM - 7:00 PM</td></tr><tr>
-							
-							
-							
-							
-						<td class="body-item mbr-fonts-style display-7"><strong>
-								FRIDAY</strong></td><td class="body-item mbr-fonts-style display-7">9:00 AM - 7:00 PM</td></tr><tr>
-							
-							
-							
-							
-						<td class="body-item mbr-fonts-style display-7"><strong>
-								SATURDAY</strong></td><td class="body-item mbr-fonts-style display-7">9:00 AM - 6:00 PM</td></tr><tr>
-							
-							
-							
-							
-						<td class="body-item mbr-fonts-style display-7"><strong>
-								SUNDAY</strong></td><td class="body-item mbr-fonts-style display-7">10:00 AM - 5:00 PM</td></tr></tbody>
-				</table>
-			</div>
-			<div class="container table-info-container">
-				
-			</div>
-		</div>
-	</div>
+<!-- Redesigned Hours Section -->
+<section class="hours-section" id="hours">
+  <div class="hours-container">
+    <div class="hours-heading">
+      <h2>Salon Hours</h2>
+      <p>We're open 7 days a week to serve you better. Walk-ins are welcome, but appointments are recommended.</p>
+    </div>
+    
+    <div class="hours-card">
+      <table class="hours-table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Hours</th>
+          </tr>
+        </thead>
+        <tbody id="hoursTableBody">
+          <tr class="monday">
+            <td class="day"><i class="far fa-calendar-alt me-2"></i>Monday</td>
+            <td class="time">9:00 AM - 7:00 PM</td>
+          </tr>
+          <tr class="tuesday">
+            <td class="day"><i class="far fa-calendar-alt me-2"></i>Tuesday</td>
+            <td class="time">9:00 AM - 7:00 PM</td>
+          </tr>
+          <tr class="wednesday">
+            <td class="day"><i class="far fa-calendar-alt me-2"></i>Wednesday</td>
+            <td class="time">9:00 AM - 7:00 PM</td>
+          </tr>
+          <tr class="thursday">
+            <td class="day"><i class="far fa-calendar-alt me-2"></i>Thursday</td>
+            <td class="time">9:00 AM - 7:00 PM</td>
+          </tr>
+          <tr class="friday">
+            <td class="day"><i class="far fa-calendar-alt me-2"></i>Friday</td>
+            <td class="time">9:00 AM - 7:00 PM</td>
+          </tr>
+          <tr class="saturday weekend-highlight">
+            <td class="day"><i class="far fa-calendar-alt me-2"></i>Saturday</td>
+            <td class="time">9:00 AM - 6:00 PM</td>
+          </tr>
+          <tr class="sunday weekend-highlight">
+            <td class="day"><i class="far fa-calendar-alt me-2"></i>Sunday</td>
+            <td class="time">10:00 AM - 5:00 PM</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </section>
 
 
@@ -189,7 +251,19 @@
   <script src="assets/datatables/vanilla-dataTables.min.js"></script>
   <script src="assets/theme/js/script.js"></script>
   
-  
+  <script>
+    // Highlight today's day in the hours table
+    document.addEventListener('DOMContentLoaded', function() {
+      const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+      const today = new Date().getDay(); // 0 = Sunday, 1 = Monday, etc.
+      
+      // Add highlight class to today's row
+      const todayRow = document.querySelector(`.hours-table .${days[today]}`);
+      if (todayRow) {
+        todayRow.classList.add('today-highlight');
+      }
+    });
+  </script>
   
 
 <script>"use strict";if("loading"in HTMLImageElement.prototype){document.querySelectorAll('img[loading="lazy"],iframe[loading="lazy"]').forEach(e=>{e.src=e.dataset.src,e.style.paddingTop=100*e.getAttribute("data-aspectratio")+"%",e.style.height=0,e.onload=function(){e.removeAttribute("style")}})}else{const e=document.createElement("script");e.src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js",document.body.appendChild(e)}</script>
