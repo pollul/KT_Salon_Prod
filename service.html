@@ -31,27 +31,42 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css" rel="stylesheet" />
   
   <style>
+    :root {
+      --primary-color: #6a3093;
+      --bg-light: #fcf4f7;
+      --text-dark: #333;
+      --text-medium: #555;
+      --text-light: #777;
+      --border-light: #f0f0f0;
+      --shadow-regular: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+      --font-primary: 'Cormorant Garamond', serif;
+      --font-secondary: 'Epilogue', sans-serif;
+      --border-radius: 12px;
+      --transition: all 0.3s ease;
+    }
+    
     /* Services Page Main Styles */
     .services-header {
-      background-color: #fcf4f7;
+      background-color: var(--bg-light);
       padding: 60px 0;
       margin-bottom: 40px;
       text-align: center;
     }
     
     .services-header h1 {
-      color: #333;
-      font-family: 'Cormorant Garamond', serif;
+      color: var(--text-dark);
+      font-family: var(--font-primary);
       font-weight: 600;
       margin-bottom: 20px;
     }
     
     .services-header p {
-      color: #666;
+      color: var(--text-medium);
       font-size: 1.2rem;
       max-width: 800px;
       margin: 0 auto;
-      font-family: 'Epilogue', sans-serif;
+      font-family: var(--font-secondary);
     }
     
     .services-container {
@@ -60,7 +75,7 @@
       padding: 0 20px 60px;
     }
     
-    /* New Service Card Styles */
+    /* Service Cards and Categories */
     .service-cards-container {
       display: flex;
       flex-direction: column;
@@ -71,36 +86,28 @@
     .services-summary {
       text-align: center;
       margin-bottom: 20px;
-      font-family: 'Epilogue', sans-serif;
-      color: #555;
+      font-family: var(--font-secondary);
+      color: var(--text-medium);
     }
     
-    .services-summary p {
-      font-size: 16px;
-    }
-    
-    .services-summary strong {
-      color: #333;
-    }
+    .services-summary p { font-size: 16px; }
+    .services-summary strong { color: var(--text-dark); }
     
     .service-card {
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-regular);
       overflow: hidden;
       background: white;
-      transition: all 0.3s ease;
+      transition: var(--transition);
       position: relative;
     }
     
     .service-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      box-shadow: var(--shadow-hover);
     }
     
-    .service-card-header {
-      position: relative;
-    }
-    
+    /* Card Header and Buttons */
     .service-card-button {
       width: 100%;
       background: white;
@@ -110,36 +117,25 @@
       align-items: center;
       text-align: left;
       cursor: pointer;
-      font-family: 'Epilogue', sans-serif;
+      font-family: var(--font-secondary);
       font-weight: 600;
       font-size: 18px;
-      color: #333;
+      color: var(--text-dark);
       position: relative;
       z-index: 1;
-      transition: all 0.3s ease;
+      transition: var(--transition);
     }
     
-    .service-card-button:hover {
-      background-color: rgba(255, 255, 255, 0.9);
-    }
-    
-    .service-card-button:focus {
-      outline: none;
-    }
-    
-    .service-type-name {
-      margin-left: 15px;
-      flex-grow: 1;
-    }
+    .service-card-button:hover { background-color: rgba(255, 255, 255, 0.9); }
+    .service-card-button:focus { outline: none; }
+    .service-type-name { margin-left: 15px; flex-grow: 1; }
     
     .toggle-icon {
       transition: transform 0.3s ease;
       font-size: 16px;
     }
     
-    .service-card-button.expanded .toggle-icon {
-      transform: rotate(180deg);
-    }
+    .service-card-button.expanded .toggle-icon { transform: rotate(180deg); }
     
     .service-icon {
       font-size: 24px;
@@ -147,18 +143,10 @@
       text-align: center;
     }
     
-    .service-card-collapse {
-      transition: all 0.3s ease;
-    }
-    
-    .service-card-body {
-      padding: 0;
-    }
-    
     /* Category Styles */
     .service-category {
       margin-bottom: 20px;
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid var(--border-light);
     }
     
     .service-category:last-child {
@@ -175,7 +163,7 @@
     
     .category-name {
       margin: 0;
-      font-family: 'Epilogue', sans-serif;
+      font-family: var(--font-secondary);
       font-size: 20px;
       font-weight: 600;
       color: #444;
@@ -185,7 +173,7 @@
       margin-right: 12px;
       font-size: 18px;
       color: #666;
-      transition: all 0.3s ease;
+      transition: var(--transition);
     }
     
     .category-icon-link {
@@ -194,28 +182,26 @@
     }
     
     .category-icon-link:hover .category-icon {
-      color: #6a3093;
+      color: var(--primary-color);
       transform: scale(1.2);
     }
     
     .category-icon-link.active-filter .category-icon {
-      color: #6a3093;
+      color: var(--primary-color);
     }
     
     /* Service Item Styles */
-    .service-list {
-      padding: 10px 0;
-    }
+    .service-list { padding: 10px 0; }
     
     .service-item {
       padding: 15px 30px;
-      transition: all 0.3s ease;
+      transition: var(--transition);
       border-left: 3px solid transparent;
     }
     
     .service-item:hover {
       background-color: rgba(252, 244, 247, 0.5);
-      border-left-color: #6a3093;
+      border-left-color: var(--primary-color);
     }
     
     .service-details {
@@ -230,11 +216,11 @@
     }
     
     .service-name {
-      font-family: 'Epilogue', sans-serif;
+      font-family: var(--font-secondary);
       font-size: 16px;
       font-weight: 500;
       margin: 0 0 5px 0;
-      color: #333;
+      color: var(--text-dark);
       display: flex;
       align-items: center;
     }
@@ -248,14 +234,14 @@
     
     .service-item:hover .service-item-icon {
       transform: translateX(3px);
-      color: #6a3093;
+      color: var(--primary-color);
     }
     
     .service-description {
       margin: 5px 0 0 22px;
       font-size: 14px;
-      color: #777;
-      font-family: 'Epilogue', sans-serif;
+      color: var(--text-light);
+      font-family: var(--font-secondary);
       font-weight: 300;
     }
     
@@ -267,15 +253,15 @@
     }
     
     .service-price {
-      font-family: 'Epilogue', sans-serif;
+      font-family: var(--font-secondary);
       font-weight: 600;
       font-size: 18px;
-      color: #333;
+      color: var(--text-dark);
       margin-bottom: 5px;
     }
     
     .service-time {
-      font-family: 'Epilogue', sans-serif;
+      font-family: var(--font-secondary);
       font-size: 14px;
       color: #888;
     }
@@ -284,7 +270,7 @@
     .popular-badge {
       display: inline-block;
       font-size: 11px;
-      background-color: #6a3093;
+      background-color: var(--primary-color);
       color: white;
       padding: 3px 8px;
       border-radius: 30px;
@@ -295,9 +281,7 @@
       text-transform: uppercase;
     }
     
-    .popular-service {
-      background-color: rgba(106, 48, 147, 0.05);
-    }
+    .popular-service { background-color: rgba(106, 48, 147, 0.05); }
     
     /* Service type background styling */
     .service-header-bg {
@@ -308,8 +292,7 @@
     .service-header-bg:before {
       content: '';
       position: absolute;
-      top: 0;
-      right: 0;
+      top: 0; right: 0;
       width: 30%;
       height: 100%;
       background-size: cover;
@@ -319,9 +302,7 @@
       z-index: 0;
     }
     
-    .service-header-bg:hover:before {
-      opacity: 0.15;
-    }
+    .service-header-bg:hover:before { opacity: 0.15; }
     
     /* Loading Animation */
     .service-loader {
@@ -337,17 +318,15 @@
       height: 40px;
       border: 4px solid rgba(106, 48, 147, 0.1);
       border-radius: 50%;
-      border-top-color: #6a3093;
+      border-top-color: var(--primary-color);
       animation: spin 1s ease-in-out infinite;
       margin-bottom: 20px;
     }
     
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
     
     .service-loader p {
-      font-family: 'Epilogue', sans-serif;
+      font-family: var(--font-secondary);
       color: #666;
     }
     
@@ -362,9 +341,9 @@
       max-width: 500px;
       text-align: center;
       padding: 30px;
-      border-radius: 12px;
+      border-radius: var(--border-radius);
       background-color: #fff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: var(--shadow-regular);
     }
     
     .service-error-icon {
@@ -373,29 +352,31 @@
       margin-bottom: 20px;
     }
     
-    .service-error-title {
-      font-family: 'Epilogue', sans-serif;
-      font-weight: 600;
+    .service-error-title, .service-error-message {
+      font-family: var(--font-secondary);
       margin-bottom: 10px;
-      color: #333;
+    }
+    
+    .service-error-title {
+      font-weight: 600;
+      color: var(--text-dark);
     }
     
     .service-error-message {
-      font-family: 'Epilogue', sans-serif;
       color: #666;
       margin-bottom: 20px;
     }
     
     .service-error-retry {
       border: none;
-      background-color: #6a3093;
+      background-color: var(--primary-color);
       color: white;
       padding: 10px 20px;
       border-radius: 50px;
-      font-family: 'Epilogue', sans-serif;
+      font-family: var(--font-secondary);
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: var(--transition);
     }
     
     .service-error-retry:hover {
@@ -409,30 +390,12 @@
         padding: 40px 0;
       }
       
-      .services-header h1 {
-        font-size: 28px;
-      }
-      
-      .services-header p {
-        font-size: 16px;
-      }
-      
-      .service-card-button {
-        padding: 15px 20px;
-        font-size: 16px;
-      }
-      
-      .category-header {
-        padding: 12px 20px;
-      }
-      
-      .category-name {
-        font-size: 18px;
-      }
-      
-      .service-item {
-        padding: 12px 20px;
-      }
+      .services-header h1 { font-size: 28px; }
+      .services-header p { font-size: 16px; }
+      .service-card-button { padding: 15px 20px; font-size: 16px; }
+      .category-header { padding: 12px 20px; }
+      .category-name { font-size: 18px; }
+      .service-item { padding: 12px 20px; }
       
       .service-details {
         flex-direction: column;
@@ -451,52 +414,20 @@
         align-items: center;
       }
       
-      .service-price {
-        margin-bottom: 0;
-      }
+      .service-price { margin-bottom: 0; }
     }
     
     @media (max-width: 576px) {
-      .services-header h1 {
-        font-size: 24px;
-      }
-      
-      .services-header p {
-        font-size: 14px;
-      }
-      
-      .service-card-button {
-        padding: 12px 15px;
-        font-size: 15px;
-      }
-      
-      .service-icon {
-        font-size: 18px;
-      }
-      
-      .category-name {
-        font-size: 16px;
-      }
-      
-      .service-name {
-        font-size: 14px;
-      }
-      
-      .service-description {
-        font-size: 12px;
-      }
-      
-      .service-price {
-        font-size: 15px;
-      }
-      
-      .service-time {
-        font-size: 12px;
-      }
-      
-      .service-header-bg:before {
-        width: 15%;
-      }
+      .services-header h1 { font-size: 24px; }
+      .services-header p { font-size: 14px; }
+      .service-card-button { padding: 12px 15px; font-size: 15px; }
+      .service-icon { font-size: 18px; }
+      .category-name { font-size: 16px; }
+      .service-name { font-size: 14px; }
+      .service-description { font-size: 12px; }
+      .service-price { font-size: 15px; }
+      .service-time { font-size: 12px; }
+      .service-header-bg:before { width: 15%; }
     }
   </style>
 </head>
